@@ -1,7 +1,7 @@
 import Header from './components/Header.vue';
 import Home from './components/Home.vue';
 import Portfolio from './components/Portfolio.vue';
-
+import Stocks from './components/Stocks.vue';
 
 export const routes = [
   {
@@ -19,7 +19,14 @@ export const routes = [
       'header': Header
     }
   }, {
+    path: '/stocks',
+    name: 'stocks',
+    components: {
+      default: Stocks,
+      'header': Header,
+    }
+  }, {
     path: '*',
     redirect: '/'
   }
-]
+];
