@@ -2,56 +2,62 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+        <button @click="toggleMobileMenu" type="button" class="navbar-toggle collapsed" :aria-expanded="isMobileMenuOpen"
           aria-controls="navbar">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <router-link class="navbar-brand" to="/">Stock Trader</router-link>
+        <router-link class="navbar-brand" :to="{name: 'home'}">Stock Trader</router-link>
       </div>
-      <div id="navbar" class="navbar-collapse collapse">
+      <div :class="['navbar-collapse', 'collapse', {'in': isMobileMenuOpen}]">
         <ul class="nav navbar-nav">
-          <router-link tag="li" :to="{name: 'portfolio'}"><a>Portfolio</a></router-link>
-          <li>
-            <a href="#">Stocks</a>
-          </li>
+          <router-link tag="li" :to="{name: 'portfolio'}" active-class="active"><a>Portfolio</a></router-link>
+          <router-link tag="li" :to="{name: 'stocks'}" active-class="active"><a>Stocks</a></router-link>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li class="active">
-            <a href="./">Default
-              <span class="sr-only">(current)</span>
-            </a>
+          <li>
+            <a href="#">End Day</a>
           </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown
+          <li :class="['dropdown', {'open': isDropdownOpen}]">
+            <a href="#" @click.prevent="toggleDropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" :aria-expanded="isDropdownOpen">Save &amp; Load
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="#">Action</a>
+                <a href="#">Save Data</a>
               </li>
               <li>
-                <a href="#">Another action</a>
-              </li>
-              <li>
-                <a href="#">Something else here</a>
-              </li>
-              <li role="separator" class="divider"></li>
-              <li class="dropdown-header">Nav header</li>
-              <li>
-                <a href="#">Separated link</a>
-              </li>
-              <li>
-                <a href="#">One more separated link</a>
+                <a href="#">Load Data</a>
               </li>
             </ul>
           </li>
+          <li>
+            <p class="navbar-text"><strong>Funds: $ {{ funds }}</strong></p>
+          </li>
         </ul>
-      </div>
-      <!--/.nav-collapse -->
-    </div>
-    <!--/.container-fluid -->
+      </div><!--/.nav-collapse -->
+    </div><!--/.container-fluid -->
   </nav>
 </template>
+
+<script>
+import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+export default {
+  computed: {
+    ...mapGetters([
+      'funds',
+      'isDropdownOpen',
+      'isMobileMenuOpen'
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'toggleDropdown',
+      'toggleMobileMenu'
+    ])
+  }
+}
+</script>
