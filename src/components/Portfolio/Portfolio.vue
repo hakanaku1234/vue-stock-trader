@@ -5,6 +5,7 @@
       :key="i"
       :title="item.title"
       :price="item.price"
+      :qunatity="item.quantity"
     />
   </div>
 </template>
@@ -15,7 +16,7 @@ import PortfolioItem from './PortfolioItem.vue';
 export default {
   computed: {
     ...mapGetters([
-      'getPortfolio'
+      'getPortfolio',
     ])
   },
   components: {

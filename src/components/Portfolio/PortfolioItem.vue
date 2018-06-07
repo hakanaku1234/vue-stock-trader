@@ -2,13 +2,13 @@
   <div class="col-md-6">
     <div class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title">{{ title }} <small>(Price: $ {{ price }})</small></h3>
+        <h3 class="panel-title">{{ title }} <small>(Price: $ {{ price }} | Quantity: {{ qunatity }})</small></h3>
       </div>
       <div class="panel-body">
         <div class="input-group">
-          <input type="text" placeholder="Quantity" class="form-control">
+          <input v-model="stockQty" type="text" placeholder="Quantity" class="form-control">
           <div class="input-group-btn">
-            <button class="btn btn-danger">Sell</button>
+            <button :disabled="!stockQty" class="btn btn-danger">Sell</button>
           </div>
         </div>
       </div>
@@ -26,7 +26,16 @@ export default {
     price: {
       type: Number,
       requried: true,
+    },
+    qunatity: {
+      type: Number,
+      requried: true,
     }
+  },
+  data() {
+    return {
+      stockQty: ''
+    };
   }
 }
 </script>

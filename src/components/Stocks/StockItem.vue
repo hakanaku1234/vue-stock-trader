@@ -6,9 +6,9 @@
       </div>
       <div class="panel-body">
         <div class="input-group">
-          <input type="text" placeholder="Quantity" class="form-control">
+          <input v-model="quantity" type="text" placeholder="Quantity" class="form-control">
           <div class="input-group-btn">
-            <button class="btn btn-success">Buy</button>
+            <button @click="buyItem" :disabled="!quantity" class="btn btn-success">Buy</button>
           </div>
         </div>
       </div>
@@ -17,6 +17,7 @@
 </template>
 
 <script>
+// import { mapActions } from 'vuex';
 export default {
   props: {
     title: {
@@ -26,6 +27,20 @@ export default {
     price: {
       type: Number,
       requried: true,
+    }
+  },
+  data() {
+    return {
+      quantity: ''
+    };
+  },
+  methods: {
+    // ...mapActions([
+    //   'buyStock'
+    // ]),
+    buyItem() {
+      this.$store.dispatch('buyStock', { title: this.title, price: 100, quantity: parseInt(this.quantity) });
+      this.quantity = '';
     }
   }
 }

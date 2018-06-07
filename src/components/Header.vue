@@ -18,7 +18,7 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li>
-            <a href="#">End Day</a>
+            <a href="#" @click.prevent="updateStocks">End Day</a>
           </li>
           <li :class="['dropdown', {'open': isDropdownOpen}]">
             <a href="#" @click.prevent="toggleDropdown" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" :aria-expanded="isDropdownOpen">Save &amp; Load
@@ -57,7 +57,8 @@ export default {
   methods: {
     ...mapActions([
       'toggleDropdown',
-      'toggleMobileMenu'
+      'toggleMobileMenu',
+      'updateStocks'
     ])
   },
   mixins: [formatCurrency],
