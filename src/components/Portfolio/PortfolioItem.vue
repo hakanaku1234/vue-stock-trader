@@ -2,7 +2,7 @@
   <div class="col-md-6">
     <div class="panel panel-danger">
       <div class="panel-heading">
-        <h3 class="panel-title">Panel title <small>(Price: $100)</small></h3>
+        <h3 class="panel-title">{{ title }} <small>(Price: $ {{ price }})</small></h3>
       </div>
       <div class="panel-body">
         <div class="input-group">
@@ -16,16 +16,17 @@
   </div>
 </template>
 
-
-// export default {
-//   props: {
-//     title: {
-//       type: String,
-//       required: true,
-//     },
-//     price: {
-//       type: Number,
-//       required: true,
-//     }
-//   }
-// }
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      requried: true,
+    },
+    price: {
+      type: Number,
+      requried: true,
+    }
+  }
+}
+</script>

@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 
+import stocks from './modules/stocks';
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -25,5 +27,8 @@ export const store = new Vuex.Store({
   actions: {
     toggleDropdown: context => context.commit('toggleDropdown'),
     toggleMobileMenu: context => context.commit('toggleMobileMenu'),
+  },
+  modules: {
+    stocks
   }
 });
