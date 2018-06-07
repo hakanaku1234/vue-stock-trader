@@ -34,7 +34,7 @@
             </ul>
           </li>
           <li>
-            <p class="navbar-text"><strong>Funds: $ {{ funds }}</strong></p>
+            <p class="navbar-text"><strong>Funds: $ {{ funds | formatCurrency }}</strong></p>
           </li>
         </ul>
       </div><!--/.nav-collapse -->
@@ -45,6 +45,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { mapActions } from 'vuex';
+import { formatCurrency } from '../mixins';
 export default {
   computed: {
     ...mapGetters([
@@ -58,6 +59,7 @@ export default {
       'toggleDropdown',
       'toggleMobileMenu'
     ])
-  }
+  },
+  mixins: [formatCurrency],
 }
 </script>
