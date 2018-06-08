@@ -26,10 +26,10 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a href="#">Save Data</a>
+                <a href="#" @click.prevent="saveData">Save Data</a>
               </li>
               <li>
-                <a href="#">Load Data</a>
+                <a href="#" @click.prevent="loadData">Load Data</a>
               </li>
             </ul>
           </li>
@@ -59,7 +59,15 @@ export default {
       'toggleDropdown',
       'toggleMobileMenu',
       'updateStocks'
-    ])
+    ]),
+    saveData() {
+      this.$store.dispatch('saveData');
+      this.$store.dispatch('toggleDropdown');
+    },
+    loadData() {
+      this.$store.dispatch('loadData');
+      this.$store.dispatch('toggleDropdown');
+    }
   },
   mixins: [formatCurrency],
 }

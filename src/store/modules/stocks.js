@@ -7,6 +7,7 @@ const state = {
     { title: 'Twitter', price: 100 },
   ],
   stocksInPortfolio: [],
+  savedData: null,
 };
 
 const getters = {
@@ -48,6 +49,25 @@ const mutations = {
     } else {
       alert(`Not enough stocks to sell! Maximum stocks you can sell: ${state.stocksInPortfolio[index].quantity}`);
     }
+  },
+  saveData: ( state, payload ) => {
+    const savedData = {
+      funds: state.funds,
+      stocks: Array.from(state.stocks),
+      stocksInPortfolio: Array.from(state.stocksInPortfolio),
+    }
+    localStorage.setItem('funds', JSON.stringify(savedData.funds));
+    localStorage.setItem('stocks', JSON.stringify(savedData.stocks));
+    localStorage.setItem('stocksInPortfolio', JSON.stringify(savedData.stocksInPortfolio));
+  },
+  loadData: state => {
+    const funds = JSON.parse(localStorage.getItem('funds'));
+    const stocks = JSON.parse(localStorage.getItem('stocks'));
+    const stocksInPortfolio = JSON.parse(localStorage.getItem('stocksInPortfolio'));
+
+    state.funds = funds;
+    state.stocks = stocks;
+    state.stocksInPortfolio = stocksInPortfolio;
   }
 };
 
@@ -60,6 +80,12 @@ const actions = {
   },
   sellStock: ( context, payload ) => {
     context.commit('sellStock', payload);
+  },
+  saveData: context => {
+    context.commit('saveData');
+  },
+  loadData: context => {
+    context.commit('loadData');
   }
 };
 
