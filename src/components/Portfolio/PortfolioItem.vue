@@ -8,7 +8,7 @@
         <div class="input-group">
           <input v-model="stockQty" type="text" placeholder="Quantity" class="form-control">
           <div class="input-group-btn">
-            <button :disabled="!stockQty" class="btn btn-danger">Sell</button>
+            <button @click="sellStock" :disabled="!stockQty" class="btn btn-danger">Sell</button>
           </div>
         </div>
       </div>
@@ -36,6 +36,12 @@ export default {
     return {
       stockQty: ''
     };
+  },
+  methods: {
+    sellStock(payload) {
+      this.$store.dispatch('sellStock', {title: this.title, price: this.price, quantity: parseInt(this.stockQty)});
+      this.stockQty = '';
+    }
   }
 }
 </script>

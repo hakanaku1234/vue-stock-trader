@@ -23,10 +23,27 @@ const mutations = {
     });
   },
   buyStock: ( state, payload ) => {
-    // if ( state.stocksInPortfolio ) {
-      state.stocksInPortfolio.push(payload);
-    // }
-    state.funds -= payload.quantity * payload.price;
+    if (state.funds >= payload.quantity * payload.price) {
+      const index = state.stocksInPortfolio.findIndex(e => e.title === payload.title);
+      if ( index !== -1 ) {
+        state.stocksInPortfolio[index].quantity += payload.quantity;
+      } else {
+        state.stocksInPortfolio.push(payload);
+      }
+      state.funds -= payload.quantity * payload.price;
+    } else {
+      alert('Not enough funds to buy!');
+    }
+  },
+  sellStock: ( state, payload ) => {
+    const index = state.stocksInPortfolio.findIndex(e => e.title === payload.title);
+    if (state.stocksInPortfolio[index].quantity >= payload.quantity) {
+      (state.stocksInPortfolio[index].quantity - payload.quantity) === 0 ? state.stocksInPortfolio.splice(index, 1) : state.stocksInPortfolio[index].quantity -= payload.quantity;
+      state.funds += payload.quantity * payload.price;
+    } else {
+      alert(`Not enough stocks to sell! Maximum stocks you can sell: ${state.stocksInPortfolio[index].quantity}`);
+    }
+
   }
 };
 
@@ -36,6 +53,9 @@ const actions = {
   },
   buyStock: (context, payload) => {
     context.commit('buyStock', payload);
+  },
+  sellStock: ( context, payload ) => {
+    context.commit('sellStock', payload);
   }
 };
 

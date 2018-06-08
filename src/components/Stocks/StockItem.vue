@@ -39,7 +39,7 @@ export default {
     //   'buyStock'
     // ]),
     buyItem() {
-      this.$store.dispatch('buyStock', { title: this.title, price: 100, quantity: parseInt(this.quantity) });
+      this.$store.dispatch('buyStock', { title: this.title, price: parseInt(this.price), quantity: parseInt(this.quantity) });
       this.quantity = '';
     }
   }
