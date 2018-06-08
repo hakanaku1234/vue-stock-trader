@@ -19,7 +19,12 @@ const mutations = {
   updateStocks: state => {
     const randomNum = (min, max) => Math.floor(Math.random() * (max - min)) + min;
     state.stocks.forEach(el => {
-      el.price = randomNum(10, 300);
+      const newStockPrice = randomNum(10, 300);
+      const indexOfPortfolio = state.stocksInPortfolio.findIndex(e => e.title === el.title);
+      el.price = newStockPrice;
+      if ( indexOfPortfolio !== -1 ) {
+        state.stocksInPortfolio[indexOfPortfolio].price = newStockPrice;
+      }
     });
   },
   buyStock: ( state, payload ) => {
@@ -43,7 +48,6 @@ const mutations = {
     } else {
       alert(`Not enough stocks to sell! Maximum stocks you can sell: ${state.stocksInPortfolio[index].quantity}`);
     }
-
   }
 };
 
