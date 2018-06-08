@@ -19,12 +19,12 @@ body {
 }
 
 .fade-enter-active {
-  transition: all .3s ease;
+  transition: all .2s ease;
 }
 
 .fade-leave-active {
   opacity: 0;
   transform: translateY(20px);
-  transition: all .3s ease;
+  transition: all .2s ease;
 }
 </style>
